@@ -8,9 +8,7 @@ public class PlayerScript : MonoBehaviour {
 	private Animator anim;
 	public float speed; //Movement Speed
 
-	//Test
-	float somethingNew;
-	string somethingElse;
+
 
 
 	// Use this for initialization
