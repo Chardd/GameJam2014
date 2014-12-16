@@ -20,8 +20,8 @@ public class PlayerScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		float moveDirHor = Input.GetAxisRaw ("Horizontal"); // Get Left/Right movement
-		float moveDirVer = Input.GetAxisRaw ("Vertical"); //Get Up/Down movement
-		playerBody.velocity = new Vector2 (moveDirHor * speed, moveDirVer * speed);
+		float moveDirHor = Input.GetAxisRaw ("Horizontal"); //Get left/right input
+		float moveDirVer = Input.GetAxisRaw ("Vertical"); //Get up/down input
+		playerBody.velocity = new Vector2 (moveDirHor * speed, moveDirVer * speed); //Move player sprite
 	}
 }
