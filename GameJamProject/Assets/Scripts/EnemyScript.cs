@@ -26,9 +26,9 @@ public class EnemyScript : MonoBehaviour {
 		// If they get within a given distance to the player
 		if(Vector3.Distance(target.position, enemy.position) < triggerDistance ){
 			enemy.position = Vector3.MoveTowards(enemy.position, target.position, speed * Time.deltaTime);
-			Debug.Log("DETECT");
+			//Debug.Log("DETECT");
 		}else{
-			Debug.Log("LOITER");
+			//Debug.Log("LOITER");
 		}
 
 	
