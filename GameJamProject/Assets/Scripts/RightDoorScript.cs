@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class TopDoorScript : MonoBehaviour {
-	public float transitionDuration = 2.5f;
-
+public class RightDoorScript : MonoBehaviour {
+	public float transitionDuration = 2.5f; 
+	
 	public Transform camera;
 	public Transform player;
 	// Use this for initialization
@@ -14,33 +14,29 @@ public class TopDoorScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+		
 	}
-
+	
 	// If player collides with the door
 	void OnTriggerEnter2D(Collider2D collider){
 		if (collider.gameObject.tag == "Player"){
-			// Copy camera's position
 			/*Vector3 temp = camera.position;
-			//add to it
-			temp.y += 12.725f;
-			//apply changes
+			temp.x += 19.1f;
 			camera.position = temp;*/
-			Debug.Log ("UP");
+			Debug.Log ("RIGHT");
 
 			StartCoroutine(Transition());
 
 			Vector2 playerTemp = player.position;
-			playerTemp.y += 7.85f;
+			playerTemp.x += 9.33f;
 			player.position = playerTemp;
 		}
 	}
-
 	IEnumerator Transition() { 
 		float t = 0.0f; 
 		Vector3 startingPos = camera.position; 
 		Vector3 cameraTarget = camera.position;
-		cameraTarget.y += 12.725f;
+		cameraTarget.x += 19.1f;
 		
 		while (t < 1.0f) { 
 			t += Time.deltaTime * (Time.timeScale/transitionDuration);
