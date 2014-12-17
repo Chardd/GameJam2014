@@ -15,6 +15,7 @@ public class EnemyScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		target = GameObject.FindWithTag("Player").transform;
 
 	}
 	
