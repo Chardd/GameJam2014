@@ -24,7 +24,6 @@ public class MeleeScript : MonoBehaviour {
 	
 	void OnTriggerEnter2D(Collider2D otherObject)
 	{ //Handler for hitting something
-		Debug.Log ("Hit");
 		if (otherObject.tag == "Enemy") 
 		{
 			Destroy (otherObject.gameObject);
@@ -33,7 +32,6 @@ public class MeleeScript : MonoBehaviour {
 	
 	IEnumerator Die()
 	{
-		Debug.Log ("Die");
 		//anim.SetBool ("expend", true); //Change sprite to fading one
 		yield return new WaitForSeconds (0.2f); //duration of attack
 		Destroy (gameObject); //Delete the object

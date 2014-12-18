@@ -19,6 +19,8 @@ public class PlayerScript : MonoBehaviour {
 		directionTracker = 2;
 	}
 
+	//here's an added comment.
+
 	// Update is called once per frame
 	void Update () {
 		float moveDirHor = Input.GetAxisRaw ("Horizontal"); //Get left/right input
