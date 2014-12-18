@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+
 
 public class PlayerScript : MonoBehaviour {
 
@@ -15,6 +17,9 @@ public class PlayerScript : MonoBehaviour {
     public bool weaponUpgraded = false; //Is weapon upgraded
     public bool hasKey = false; //Has player found the key
     public int lockerTotal; //total number of lockers on the 
+    public int[] lockerContents;
+    public int lockersOpened = 0; //How many have been opened
+
 
 
 	// Use this for initialization
@@ -25,7 +30,11 @@ public class PlayerScript : MonoBehaviour {
 		directionTracker = 2;
         canAttack = true;
         weaponUpgraded = false;
-        CountLockers(); // set lockerTotal to number of lockers
+        lockerTotal = CountLockers(); // set lockerTotal to number of lockers
+        lockerContents = new int[lockerTotal]; //set size of array
+        Debug.Log(lockerTotal);
+        lockerContents = FillLockers(lockerContents);// fill lockerList with 2,1,and remaining zeros
+
 	}
 
 	//here's an added comment.
@@ -116,17 +125,56 @@ public class PlayerScript : MonoBehaviour {
     public void SetInTransition( bool inBool){
         inTransition = inBool;
     }
-    public void WeaponRoll(){
-        Random.Range(-10.0F, 10.0F);
-    }
-    
-    /*public void KeyRoll(){
-        
-    }*/
 
-    void CountLockers(){
+
+    int CountLockers(){
         GameObject[] foundLockers;
         foundLockers = GameObject.FindGameObjectsWithTag("Locker");
-        lockerTotal = foundLockers.Length;
+        return foundLockers.Length;
     }
+
+
+    // Fill a list with 0 except for 2(key) and 1(staff)
+    int[] FillLockers(int[] arr){
+        // make all the lockers empty
+        for(int i = 0; i < arr.Length; i++){
+            arr[i] = 0;
+        }
+
+        //drop in 
+        bool isSame = true;
+        int tempPos = Random.Range(0,arr.Length-1);
+        //int tempPos = rand.Next(0, arr.Length);
+        arr[tempPos] = 2; //drop in the key
+        int upgradePos = Random.Range(0,arr.Length-1);
+        while(isSame){
+            if(tempPos != upgradePos){
+                isSame = false;
+                break;
+            }
+            upgradePos = Random.Range(0,arr.Length-1);
+        }
+        arr[upgradePos] = 1; //drop in the upgrade
+        return arr;
+    }
+
+    public void OpenLocker(){
+        int grabbed = lockerContents[lockersOpened];
+        lockersOpened++;
+        switch(grabbed){
+            case 0:
+                Debug.Log("EMPTY");
+                break;
+            case 1:
+                weaponUpgraded = true;
+                Debug.Log("GOT UPGRADE");
+                break;
+            case 2:
+                hasKey = true;
+                Debug.Log("GOT KEY");
+                break;
+        }
+
+    }
+
 }
