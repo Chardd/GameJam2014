@@ -48,6 +48,8 @@ public class PlayerScript : MonoBehaviour {
 	void Update () {
 		float moveDirHor = Input.GetAxisRaw ("Horizontal"); //Get left/right input
 		float moveDirVer = Input.GetAxisRaw ("Vertical"); //Get up/down input
+		anim.SetFloat ("VerticalMovement", moveDirVer);//Set animation variables
+		anim.SetFloat ("HorizontalMovement", moveDirHor);
 		playerBody.velocity = new Vector2 (moveDirHor * speed, moveDirVer * speed); //Move player sprite
         HandleAttack ();
 
