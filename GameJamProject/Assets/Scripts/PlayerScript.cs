@@ -12,10 +12,9 @@ public class PlayerScript : MonoBehaviour {
 	public static bool inTransition = false;
     public GameObject MeleePrefab; //Melee game object
     public bool canAttack;
-    public bool weaponUpgraded;
-    //test
-    public bool tool;
-    public bool ghool;
+    public bool weaponUpgraded = false; //Is weapon upgraded
+    public bool hasKey = false; //Has player found the key
+    public int lockerTotal; //total number of lockers on the 
 
 
 	// Use this for initialization
@@ -26,6 +25,7 @@ public class PlayerScript : MonoBehaviour {
 		directionTracker = 2;
         canAttack = true;
         weaponUpgraded = false;
+        CountLockers(); // set lockerTotal to number of lockers
 	}
 
 	//here's an added comment.
@@ -115,5 +115,18 @@ public class PlayerScript : MonoBehaviour {
     }
     public void SetInTransition( bool inBool){
         inTransition = inBool;
+    }
+    public void WeaponRoll(){
+        Random.Range(-10.0F, 10.0F);
+    }
+    
+    /*public void KeyRoll(){
+        
+    }*/
+
+    void CountLockers(){
+        GameObject[] foundLockers;
+        foundLockers = GameObject.FindGameObjectsWithTag("Locker");
+        lockerTotal = foundLockers.Length;
     }
 }
