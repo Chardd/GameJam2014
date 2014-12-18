@@ -9,6 +9,9 @@ public class PlayerScript : MonoBehaviour {
 	public float speed; //Movement Speed
 	public float directionTracker; //Last direction moved 
 	public GameObject ProjectilePrefab; //Projectile game object
+	public GameObject MeleePrefab; //Melee game object
+	public bool canAttack;
+	public bool weaponUpgraded;
 
 	// Use this for initialization
 	void Start () {
@@ -16,6 +19,8 @@ public class PlayerScript : MonoBehaviour {
 		anim = GetComponent<Animator>();
 		speed = 5;
 		directionTracker = 2;
+		canAttack = true;
+		weaponUpgraded = false;
 	}
 
 	// Update is called once per frame
@@ -23,12 +28,13 @@ public class PlayerScript : MonoBehaviour {
 		float moveDirHor = Input.GetAxisRaw ("Horizontal"); //Get left/right input
 		float moveDirVer = Input.GetAxisRaw ("Vertical"); //Get up/down input
 		playerBody.velocity = new Vector2 (moveDirHor * speed, moveDirVer * speed); //Move player sprite
-		HandleProjectile ();
+		HandleAttack ();
+
 
 	}
 
-	//Method takes care of all things missle
-	void HandleProjectile()
+	//Method handles both attacks, close and ranged
+	void HandleAttack()
 	{ //First figure out what direction the player is facing
 		if (Input.GetAxisRaw ("Horizontal") == -1) //Left
 		{
@@ -47,28 +53,54 @@ public class PlayerScript : MonoBehaviour {
 			directionTracker = 3;
 		}
 
-		//Actually fire the projectile
+		//Set attack to face the right way
+		Quaternion ProjectileRotation = Quaternion.Euler(0, 0, 0); //Quaterion handles rotation
+		switch ((int)directionTracker)
+		{
+		case 1: //up
+			ProjectileRotation = Quaternion.Euler(0, 0, 90);
+			break;
+		case 2: //right
+			ProjectileRotation = Quaternion.Euler(0, 0, 0);
+			break;
+		case 3: //down
+			ProjectileRotation = Quaternion.Euler(0, 0, 270);
+			break;
+		case 4: //left
+			ProjectileRotation = Quaternion.Euler(0, 0, 180);
+			break;
+		} //Instantiates object using prefab, player position and generated quaternion
+		
+		//Checks for user input, currently Spacebar
 		if (Input.GetKeyDown (KeyCode.Space)) 
 		{
-			Quaternion ProjectileRotation = Quaternion.Euler(0, 0, 0);
-			switch ((int)directionTracker)
-			{ //Rotates the projectile before letting it loose
+			if (weaponUpgraded)
+			{ //Actually fire the projectile
+				Instantiate(ProjectilePrefab, transform.position, ProjectileRotation);
+			}
+			else
+			{ //If no upgraded, use close range
+
+				GameObject weapontest = (GameObject) Instantiate(MeleePrefab);
+				weapontest.transform.parent = transform;
+				switch ((int)directionTracker)
+				{
 				case 1: //up
-					ProjectileRotation = Quaternion.Euler(0, 0, 90);
+					weapontest.transform.localPosition = new Vector3(0,1,0);
 					break;
 				case 2: //right
-					ProjectileRotation = Quaternion.Euler(0, 0, 0);
+					weapontest.transform.localPosition = new Vector3(1,0,0);
 					break;
 				case 3: //down
-					ProjectileRotation = Quaternion.Euler(0, 0, 270);
+					weapontest.transform.localPosition = new Vector3(0,-1,0);
 					break;
 				case 4: //left
-					ProjectileRotation = Quaternion.Euler(0, 0, 180);
+					weapontest.transform.localPosition = new Vector3(-1,0,0);
 					break;
-
-			} //Instantiates 
-			Instantiate(ProjectilePrefab, transform.position, ProjectileRotation);
+				}
+				weapontest.transform.rotation = ProjectileRotation;
+			}
 		}
-
 	}
+
 }

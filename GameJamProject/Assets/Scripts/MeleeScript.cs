@@ -1,52 +1,41 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ProjectileScript : MonoBehaviour {
-	public float projectileSpeed; //Projectile's speed, DUH!
+public class MeleeScript : MonoBehaviour {
+
 	private GameObject Player; //Object used for player relativity
 	private Vector3 direction; //Used for correct facing when fired.
 	private Transform projectileTransform;
-	private bool halted;
 	private Animator anim;
 	private float playerDirection;
-
+	
 	// Use this for initialization
 	void Start () {
 		projectileTransform = transform; //This forms a quick reference to the objects Transform
-		halted = false; //starts in flight
 		anim = GetComponent<Animator>(); //for animating the sprite
 		Player = GameObject.FindGameObjectWithTag ("Player"); //Find player Object
-		direction = Vector3.right; //Set Projectile direction
-		projectileSpeed = 5;
 	}
 	
 	// Update is called once per frame
 	void Update () 
 	{
-		if (!halted) { //If the projective has hit something
-			float move = projectileSpeed * Time.deltaTime; //Calculated speed
-			projectileTransform.Translate (direction * move); //Move the projectile
-		} 
+		StartCoroutine (Die()); //Time to live
 	}
-
+	
 	void OnTriggerEnter2D(Collider2D otherObject)
 	{ //Handler for hitting something
-		if (otherObject.tag == "Obstacle" || otherObject.tag == "Enemy") 
-		{
-			StartCoroutine (Die ()); //Start to explode
-		}
+		Debug.Log ("Hit");
 		if (otherObject.tag == "Enemy") 
 		{
 			Destroy (otherObject.gameObject);
 		}
 	}
-
+	
 	IEnumerator Die()
 	{
-		halted = true; //Stop the projectile from moving
-		//anim.SetBool ("explode", true); //Change sprite to exploding one
-		yield return new WaitForSeconds (0.1f); //Let it explode for a time
+		Debug.Log ("Die");
+		//anim.SetBool ("expend", true); //Change sprite to fading one
+		yield return new WaitForSeconds (0.2f); //duration of attack
 		Destroy (gameObject); //Delete the object
 	}
-
 }
