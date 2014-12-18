@@ -60,7 +60,7 @@ public class BottomDoorScript : MonoBehaviour
         Vector2 playerPos = player.position;
         Vector2 playerTarget = player.position;
         playerTarget.y -= 7.85f;
-
+		player.renderer.enabled = false;
     
         while (t < 1.0f)
         { 
@@ -69,6 +69,7 @@ public class BottomDoorScript : MonoBehaviour
             player.position = Vector2.Lerp(playerPos, playerTarget, t);
             yield return 0;
         }
+		player.renderer.enabled = true;
         playerObj.GetComponent<PlayerScript>().SetInTransition(false);
     }
 }

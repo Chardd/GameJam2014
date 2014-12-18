@@ -26,7 +26,7 @@ public class MeleeScript : MonoBehaviour {
 	{ //Handler for hitting something
 		if (otherObject.tag == "Enemy") 
 		{
-			Destroy (otherObject.gameObject);
+			otherObject.GetComponent<EnemyScript>().stunned = true;
 		}
 	}
 	

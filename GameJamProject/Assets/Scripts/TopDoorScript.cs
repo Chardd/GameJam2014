@@ -72,6 +72,7 @@ public class TopDoorScript : MonoBehaviour
         Vector3 startingPos = camera.position; 
         Vector3 cameraTarget = camera.position;
         cameraTarget.y += 12.725f;
+		player.renderer.enabled = false;
         
         while (t < 1.0f)
         { 
@@ -81,6 +82,7 @@ public class TopDoorScript : MonoBehaviour
             yield return 0;
         }
         Debug.Log("END ROUTINE");
+		player.renderer.enabled = true;
         playerObj.GetComponent<PlayerScript>().SetInTransition(false);
             
     }

@@ -17,7 +17,7 @@ public class ProjectileScript : MonoBehaviour {
 		anim = GetComponent<Animator>(); //for animating the sprite
 		Player = GameObject.FindGameObjectWithTag ("Player"); //Find player Object
 		direction = Vector3.right; //Set Projectile direction
-		projectileSpeed = 5;
+		projectileSpeed = 8;
 	}
 	
 	// Update is called once per frame
