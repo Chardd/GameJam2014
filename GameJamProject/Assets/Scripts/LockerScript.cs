@@ -5,10 +5,13 @@ public class LockerScript : MonoBehaviour {
 
     GameObject playerObj;
     bool isOpen = false;
+    public Sprite openLocker;
+    SpriteRenderer spriteRenderer;
     
     // Use this for initialization
     void Start()
     {
+        spriteRenderer = GetComponent<SpriteRenderer>();
         playerObj = GameObject.FindWithTag("Player");          
     }
     
@@ -28,10 +31,17 @@ public class LockerScript : MonoBehaviour {
         {
             isOpen = true;
             playerObj.GetComponent<PlayerScript>().OpenLocker();
+            OpenSprite();
             Debug.Log("OPEN");
         }
     }
 
+    void OpenSprite()
+    {
+        spriteRenderer.sprite = openLocker;
+        //gameObject.GetComponent<SpriteRenderer> ().sprite = openLocker;
+    }
+    
 
 }
 
