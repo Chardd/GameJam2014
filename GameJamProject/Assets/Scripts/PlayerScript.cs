@@ -14,7 +14,7 @@ public class PlayerScript : MonoBehaviour {
     public bool canAttack;
     public bool weaponUpgraded;
     //test
-    public bool fool;
+    public bool tool;
 
 	// Use this for initialization
 	void Start () {
