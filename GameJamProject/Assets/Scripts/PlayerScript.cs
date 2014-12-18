@@ -9,6 +9,7 @@ public class PlayerScript : MonoBehaviour {
 	public float speed; //Movement Speed
 	public float directionTracker; //Last direction moved 
 	public GameObject ProjectilePrefab; //Projectile game object
+	public static bool inTransition = false;
 
 	// Use this for initialization
 	void Start () {
@@ -71,4 +72,10 @@ public class PlayerScript : MonoBehaviour {
 		}
 
 	}
+    public bool GetInTransition(){
+        return inTransition;
+    }
+    public void SetInTransition( bool inBool){
+        inTransition = inBool;
+    }
 }
