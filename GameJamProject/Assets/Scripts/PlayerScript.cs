@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-
+using UnityEngine.UI;
 
 public class PlayerScript : MonoBehaviour {
 
@@ -19,6 +19,9 @@ public class PlayerScript : MonoBehaviour {
     public int lockerTotal; //total number of lockers on the 
     public int[] lockerContents;
     public int lockersOpened = 0; //How many have been opened
+    public Slider healthBarSlider;  //reference for slider
+    public Text gameOverText;   //reference for text
+    private bool isGameOver = false; //flag to see if game is over
 
 
 
@@ -34,6 +37,8 @@ public class PlayerScript : MonoBehaviour {
         lockerContents = new int[lockerTotal]; //set size of array
         Debug.Log(lockerTotal);
         lockerContents = FillLockers(lockerContents);// fill lockerList with 2,1,and remaining zeros
+
+        gameOverText.enabled = false; //disable GameOver text on start
 
 	}
 
@@ -174,7 +179,20 @@ public class PlayerScript : MonoBehaviour {
                 Debug.Log("GOT KEY");
                 break;
         }
-
+    }
+    //Check if player enters/stays on the fire
+    void OnTriggerEnter2D(Collider2D collider){
+        //if player triggers fire object and health is greater than 0
+        if(collider.gameObject.name=="Enemy"){
+            if(healthBarSlider.value>0){
+                healthBarSlider.value -=.1f;  //reduce health
+            }
+            else{
+                isGameOver = true;    //set game over to true
+                gameOverText.enabled = true; //enable GameOver text
+                Destroy(gameObject);
+            }
+        } 
     }
 
 }
