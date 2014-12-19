@@ -1,32 +1,12 @@
-#================
-#Widnows OS Files
-#================
-
-# Windows image file caches
-Thumbs.db
-ehthumbs.db
-
-# Folder config file
-Desktop.ini
-
-# Recycle Bin used on file shares
-$RECYCLE.BIN/
-
-# Windows Installer files
-*.cab
-*.msi
-*.msm
-*.msp
-
-#=============== 
-#Unity generated
-#===============
+# =============== #
+# Unity generated #
+# =============== #
 Temp/
 Library/
 
-#=====================================
-#Visual Studio / MonoDevelop generated
-#=====================================
+# ===================================== #
+# Visual Studio / MonoDevelop generated #
+# ===================================== #
 ExportedObj/
 obj/
 *.svd
@@ -38,12 +18,10 @@ obj/
 *.user
 *.unityproj
 *.booproj
-*.csproj
-*.sln
 
-#============
-#OS generated
-#============
+# ============ #
+# OS generated #
+# ============ #
 .DS_Store
 .DS_Store?
 ._*
@@ -51,4 +29,3 @@ obj/
 .Trashes
 ehthumbs.db
 Thumbs.db
-*.meta
