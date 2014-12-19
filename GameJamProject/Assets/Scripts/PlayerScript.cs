@@ -22,6 +22,7 @@ public class PlayerScript : MonoBehaviour {
     public Slider healthBarSlider;  //reference for slider
     public Text gameOverText;   //reference for text
     private bool isGameOver = false; //flag to see if game is over
+	public bool isAttacking = false; //is the player attacking
 
 
 
@@ -96,6 +97,7 @@ public class PlayerScript : MonoBehaviour {
         //Checks for user input, currently Spacebar
 		if (Input.GetKeyDown (KeyCode.Space)) 
 		{
+			StartCoroutine(AttackBool());
             if (weaponUpgraded)
             { //Actually fire the projectile
                 Instantiate(ProjectilePrefab, transform.position, ProjectileRotation);
@@ -185,6 +187,9 @@ public class PlayerScript : MonoBehaviour {
     //Check if player enters/stays on the fire
     void OnTriggerEnter2D(Collider2D collider){
         //if player triggers fire object and health is greater than 0
+		if(isAttacking){
+			return;
+		}
         if(collider.gameObject.name=="Enemy"){
             if(healthBarSlider.value>0){
                 healthBarSlider.value -=.1f;  //reduce health
@@ -196,5 +201,11 @@ public class PlayerScript : MonoBehaviour {
             }
         } 
     }
+	IEnumerator AttackBool()
+	{
+		isAttacking = true;
+		yield return new WaitForSeconds(1f);
+		isAttacking = false;
+	}
 
 }
