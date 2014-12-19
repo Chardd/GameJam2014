@@ -32,7 +32,7 @@ public class LockerScript : MonoBehaviour {
             isOpen = true;
             playerObj.GetComponent<PlayerScript>().OpenLocker();
             OpenSprite();
-            Debug.Log("OPEN");
+            
         }
     }
 

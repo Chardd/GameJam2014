@@ -36,7 +36,7 @@ public class BottomDoorScript : MonoBehaviour
             /*Vector3 temp = camera.position;
                         temp.y -= 12.725f;
                         camera.position = temp;*/
-            Debug.Log("DOWN");
+            
 
             StartCoroutine(Transition());
 

@@ -44,7 +44,7 @@ public class TopDoorScript : MonoBehaviour
             temp.y += 12.725f;
             //apply changes
             camera.position = temp;*/
-            Debug.Log("UP");
+            
 
             StartCoroutine(Transition());
 
@@ -81,7 +81,7 @@ public class TopDoorScript : MonoBehaviour
             player.position = Vector2.Lerp(playerPos, playerTarget, t);
             yield return 0;
         }
-        Debug.Log("END ROUTINE");
+        
 		player.renderer.enabled = true;
         playerObj.GetComponent<PlayerScript>().SetInTransition(false);
             

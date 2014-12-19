@@ -31,7 +31,7 @@ public class RightDoorScript : MonoBehaviour {
 			/*Vector3 temp = camera.position;
 			temp.x += 19.1f;
 			camera.position = temp;*/
-			Debug.Log ("RIGHT");
+
 
 			StartCoroutine(Transition());
 

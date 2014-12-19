@@ -36,7 +36,7 @@ public class PlayerScript : MonoBehaviour {
         weaponUpgraded = false;
         lockerTotal = CountLockers(); // set lockerTotal to number of lockers
         lockerContents = new int[lockerTotal]; //set size of array
-        Debug.Log(lockerTotal);
+        
         lockerContents = FillLockers(lockerContents);// fill lockerList with 2,1,and remaining zeros
 
         gameOverText.enabled = false; //disable GameOver text on start
