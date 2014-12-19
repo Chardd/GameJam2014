@@ -26,7 +26,7 @@ public class EnemyScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		Debug.Log (stunned);
+		//Debug.Log (stunned);
 		if (!stunned) 
 		{
 			// How close the individual enemy is the player

@@ -23,7 +23,8 @@ public class PlayerScript : MonoBehaviour {
     public Text gameOverText;   //reference for text
     private bool isGameOver = false; //flag to see if game is over
 	public bool isAttacking = false; //is the player attacking
-
+	public SpriteRenderer keyDisplay;
+	public SpriteRenderer upgradeDisplay;
 
 
 	// Use this for initialization
@@ -40,7 +41,8 @@ public class PlayerScript : MonoBehaviour {
         lockerContents = FillLockers(lockerContents);// fill lockerList with 2,1,and remaining zeros
 
         gameOverText.enabled = false; //disable GameOver text on start
-
+		keyDisplay = GameObject.FindWithTag("Key").GetComponent<SpriteRenderer>();
+		upgradeDisplay = GameObject.FindWithTag("Upgrade").GetComponent<SpriteRenderer>();
 	}
 
 	//here's an added comment.
@@ -177,10 +179,12 @@ public class PlayerScript : MonoBehaviour {
             case 1:
                 weaponUpgraded = true;
                 Debug.Log("GOT UPGRADE");
+				upgradeDisplay.enabled = true;
                 break;
             case 2:
                 hasKey = true;
                 Debug.Log("GOT KEY");
+				keyDisplay.enabled = true;
                 break;
         }
     }
