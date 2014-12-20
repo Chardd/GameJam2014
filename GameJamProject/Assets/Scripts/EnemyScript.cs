@@ -18,6 +18,7 @@ public class EnemyScript : MonoBehaviour {
 	private Animator anim;
 	private float vert;
 	private float horz;
+	public bool started = false;
 
 
 	// Use this for initialization
@@ -30,74 +31,61 @@ public class EnemyScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		//Debug.Log (stunned);
-		if (!stunned) 
+		if (GameObject.FindWithTag ("Player").GetComponent<PlayerScript> ().started == true)
 		{
-			// How close the individual enemy is the player
-			//Debug.Log (Vector2.Distance(target.position, enemyPosition));
+			//Debug.Log (stunned);
+			if (!stunned) {
+					// How close the individual enemy is the player
+					//Debug.Log (Vector2.Distance(target.position, enemyPosition));
 
-			// If they get within a given distance to the player
-			if (Vector3.Distance (target.position, enemy.position) < triggerDistance) {
-					enemy.position = Vector3.MoveTowards (enemy.position, target.position, speed * Time.deltaTime);
-					//Debug.Log("DETECT");
-				//Animation handling maths
-				float curVert = enemy.position.y;
-				float curHorz = enemy.position.x;
-				float diffVert = Vector3.Distance( new Vector3(0,vert,0), new Vector3 (0,curVert,0));
-				float diffHorz = Vector3.Distance( new Vector3(0,horz,0), new Vector3 (0,curHorz,0));
-				Debug.Log ("Stat");
-				Debug.Log (diffVert);
-				Debug.Log (diffHorz);
+					// If they get within a given distance to the player
+					if (Vector3.Distance (target.position, enemy.position) < triggerDistance) {
+							enemy.position = Vector3.MoveTowards (enemy.position, target.position, speed * Time.deltaTime);
+							//Debug.Log("DETECT");
+							//Animation handling maths
+							float curVert = enemy.position.y;
+							float curHorz = enemy.position.x;
+							float diffVert = Vector3.Distance (new Vector3 (0, vert, 0), new Vector3 (0, curVert, 0));
+							float diffHorz = Vector3.Distance (new Vector3 (0, horz, 0), new Vector3 (0, curHorz, 0));
+							Debug.Log ("Stat");
+							Debug.Log (diffVert);
+							Debug.Log (diffHorz);
 
-				if (diffHorz > diffVert)
-				{
-					anim.SetFloat ("Vertical", 0);
-					if (curHorz < horz)
-					{
-						anim.SetFloat ("Horizontal", -1);
+							if (diffHorz > diffVert) {
+									anim.SetFloat ("Vertical", 0);
+									if (curHorz < horz) {
+											anim.SetFloat ("Horizontal", -1);
+									} else if (curHorz > horz) {
+											anim.SetFloat ("Horizontal", 1);
+									} else {
+											anim.SetFloat ("Horizontal", 0);
+									}
+							} else {
+									anim.SetFloat ("Horizontal", 0);
+									if (curVert < vert) {
+											anim.SetFloat ("Vertical", -1);
+									} else if (curVert > vert) {
+											anim.SetFloat ("Vertical", 1);
+									} else {
+											anim.SetFloat ("Vertical", 0);
+									}
+							}
+
+							vert = curVert;
+							horz = curHorz;
+					} else {
+							//Debug.Log("LOITER");
+							anim.SetFloat ("Horizontal", 0);
+							anim.SetFloat ("Vertical", 0);
 					}
-					else if (curHorz > horz)
-					{
-						anim.SetFloat ("Horizontal", 1);
-					}
-					else
-					{
-						anim.SetFloat ("Horizontal", 0);
-					}
-				}
-				else
-				{
+			} else if (!recovering) {
+					recovering = true;
+					anim.SetBool ("Stunned", true);
 					anim.SetFloat ("Horizontal", 0);
-					if (curVert < vert)
-					{
-						anim.SetFloat ("Vertical", -1);
-					}
-					else if (curVert > vert)
-					{
-						anim.SetFloat ("Vertical", 1);
-					}
-					else
-					{
-						anim.SetFloat ("Vertical", 0);
-					}
-				}
+					anim.SetFloat ("Vertical", 0);
+					StartCoroutine (Recovering ());
 
-				vert = curVert;
-				horz = curHorz;
-			} else {
-					//Debug.Log("LOITER");
-				anim.SetFloat ("Horizontal", 0);
-				anim.SetFloat ("Vertical", 0);
 			}
-		} 
-		else if (!recovering)
-		{
-			recovering = true;
-			anim.SetBool ("Stunned", true);
-			anim.SetFloat ("Horizontal", 0);
-			anim.SetFloat ("Vertical", 0);
-			StartCoroutine(Recovering ());
-
 		}
 	}
 

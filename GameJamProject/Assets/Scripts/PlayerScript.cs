@@ -33,6 +33,7 @@ public class PlayerScript : MonoBehaviour {
 	public AudioClip meleeSound;
 	public AudioClip upgradeSound;
 	GameObject camera;
+	public bool started = false;
 
 
 	// Use this for initialization
@@ -58,12 +59,15 @@ public class PlayerScript : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		float moveDirHor = Input.GetAxisRaw ("Horizontal"); //Get left/right input
-		float moveDirVer = Input.GetAxisRaw ("Vertical"); //Get up/down input
-		anim.SetFloat ("VerticalMovement", moveDirVer);//Set animation variables
-		anim.SetFloat ("HorizontalMovement", moveDirHor);
-		playerBody.velocity = new Vector2 (moveDirHor * speed, moveDirVer * speed); //Move player sprite
-        HandleAttack ();
+		if (started) 
+		{
+			float moveDirHor = Input.GetAxisRaw ("Horizontal"); //Get left/right input
+			float moveDirVer = Input.GetAxisRaw ("Vertical"); //Get up/down input
+			anim.SetFloat ("VerticalMovement", moveDirVer);//Set animation variables
+			anim.SetFloat ("HorizontalMovement", moveDirHor);
+			playerBody.velocity = new Vector2 (moveDirHor * speed, moveDirVer * speed); //Move player sprite
+			HandleAttack ();
+		}
 
 	}
 
