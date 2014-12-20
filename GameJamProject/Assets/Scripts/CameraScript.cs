@@ -5,11 +5,14 @@ public class CameraScript : MonoBehaviour {
 
 	Transform camera;
 	public bool started;
+	private bool loaded;
+	public GameObject canvas;
 	// Use this for initialization
 	void Start () {
 		camera = GameObject.FindWithTag("MainCamera").transform;
 		AudioListener.volume = 1F;
 		started = false;
+		loaded = false;
 	}
 	
 	// Update is called once per frame
@@ -29,14 +32,18 @@ public class CameraScript : MonoBehaviour {
 
 	void StartScreen()
 	{
-		GameObject.FindWithTag ("Player").GetComponent<PlayerScript> ().healthBarSlider.enabled = false;
+		if (!loaded) 
+		{
+			canvas.SetActive (false);
+			loaded = true;
+		}
 		if (!started) 
 		{
 			if (Input.GetKeyDown (KeyCode.Return)) 
 			{
-				started = true;
+				started = true; 
 				camera.position = new Vector3(0,0, -10);
-				GameObject.FindWithTag ("Player").GetComponent<PlayerScript> ().healthBarSlider.enabled = true;
+				canvas.SetActive(true);
 				GameObject.FindWithTag ("Player").GetComponent<PlayerScript> ().started = true;
 			}
 		}
