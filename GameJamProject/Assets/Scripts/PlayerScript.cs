@@ -25,6 +25,14 @@ public class PlayerScript : MonoBehaviour {
 	public bool isAttacking = false; //is the player attacking
 	public SpriteRenderer keyDisplay;
 	public SpriteRenderer upgradeDisplay;
+	public AudioClip deathSound;
+	public AudioClip fireSound;
+	public AudioClip hurtSound;
+	public AudioClip keySound;
+	public AudioClip lockerSound;
+	public AudioClip meleeSound;
+	public AudioClip upgradeSound;
+	GameObject camera;
 
 
 	// Use this for initialization
@@ -43,6 +51,7 @@ public class PlayerScript : MonoBehaviour {
         gameOverText.enabled = false; //disable GameOver text on start
 		keyDisplay = GameObject.FindWithTag("Key").GetComponent<SpriteRenderer>();
 		upgradeDisplay = GameObject.FindWithTag("Upgrade").GetComponent<SpriteRenderer>();
+		camera = GameObject.FindWithTag("MainCamera");
 	}
 
 	//here's an added comment.
@@ -103,6 +112,7 @@ public class PlayerScript : MonoBehaviour {
             if (weaponUpgraded)
             { //Actually fire the projectile
                 Instantiate(ProjectilePrefab, transform.position, ProjectileRotation);
+				audio.PlayOneShot(fireSound,1f);
             }
             else
             { //If no upgraded, use close range
@@ -126,6 +136,7 @@ public class PlayerScript : MonoBehaviour {
 
                 }
                 weapontest.transform.rotation = ProjectileRotation;
+				audio.PlayOneShot(meleeSound,1f);
             }
 		}
 
@@ -175,16 +186,19 @@ public class PlayerScript : MonoBehaviour {
         switch(grabbed){
             case 0:
                 Debug.Log("EMPTY");
+				audio.PlayOneShot(lockerSound,1f);
                 break;
             case 1:
                 weaponUpgraded = true;
                 Debug.Log("GOT UPGRADE");
 				upgradeDisplay.enabled = true;
+				audio.PlayOneShot(upgradeSound,1f);
                 break;
             case 2:
                 hasKey = true;
                 Debug.Log("GOT KEY");
 				keyDisplay.enabled = true;
+				audio.PlayOneShot(keySound,1f);
                 break;
         }
     }
@@ -197,11 +211,14 @@ public class PlayerScript : MonoBehaviour {
         if(collider.gameObject.name=="Enemy"){
             if(healthBarSlider.value>0){
                 healthBarSlider.value -=.1f;  //reduce health
+				audio.PlayOneShot(hurtSound,1f);
             }
             else{
                 isGameOver = true;    //set game over to true
-                gameOverText.enabled = true; //enable GameOver text
-                Destroy(gameObject);
+                gameOverText.enabled = true;//enable GameOver text
+				audio.PlayOneShot(deathSound,1f);
+				camera.audio.enabled = false;
+                //Destroy(gameObject);
             }
         } 
     }

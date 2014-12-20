@@ -7,6 +7,7 @@ public class CameraScript : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		camera = GameObject.FindWithTag("MainCamera").transform;
+		AudioListener.volume = 1F;
 	}
 	
 	// Update is called once per frame
