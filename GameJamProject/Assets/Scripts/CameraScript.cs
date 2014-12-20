@@ -5,11 +5,19 @@ public class CameraScript : MonoBehaviour {
 
 	Transform camera;
 	public bool started;
+	public GameObject healthText;
+	public GameObject healthSlider;
 	// Use this for initialization
 	void Start () {
 		camera = GameObject.FindWithTag("MainCamera").transform;
 		AudioListener.volume = 1F;
 		started = false;
+		GameObject.FindWithTag ("Player").GetComponent<PlayerScript>().healthBarSlider.enabled = false;
+
+		healthText = GameObject.FindWithTag("HealthText");
+		healthSlider = GameObject.FindWithTag("HealthSlider");
+		healthText.SetActive(false);
+		healthSlider.SetActive(false);
 	}
 	
 	// Update is called once per frame
@@ -29,15 +37,18 @@ public class CameraScript : MonoBehaviour {
 
 	void StartScreen()
 	{
-		GameObject.FindWithTag ("Player").GetComponent<PlayerScript> ().healthBarSlider.enabled = false;
+		//GameObject.FindWithTag ("Player").GetComponent<PlayerScript>().healthBarSlider.enabled = false;
 		if (!started) 
 		{
 			if (Input.GetKeyDown (KeyCode.Return)) 
 			{
 				started = true;
 				camera.position = new Vector3(0,0, -10);
-				GameObject.FindWithTag ("Player").GetComponent<PlayerScript> ().healthBarSlider.enabled = true;
-				GameObject.FindWithTag ("Player").GetComponent<PlayerScript> ().started = true;
+				healthSlider.SetActive(true);
+				healthText.SetActive(true);
+				GameObject.FindWithTag("HealthSlider").SetActive(true);
+				GameObject.FindWithTag ("Player").GetComponent<PlayerScript>().healthBarSlider.enabled = true;
+				GameObject.FindWithTag ("Player").GetComponent<PlayerScript>().started = true;
 			}
 		}
 	}

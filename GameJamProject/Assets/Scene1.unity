@@ -7352,7 +7352,7 @@ GameObject:
   - 114: {fileID: 349208716}
   m_Layer: 5
   m_Name: HealthSlider
-  m_TagString: Untagged
+  m_TagString: HealthSlider
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11263,7 +11263,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &497987153
 Transform:
   m_ObjectHideFlags: 0
@@ -24969,6 +24969,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   started: 0
+  healthText: {fileID: 0}
+  healthSlider: {fileID: 0}
 --- !u!82 &1120200258
 AudioSource:
   m_ObjectHideFlags: 0
@@ -27082,7 +27084,7 @@ GameObject:
   - 114: {fileID: 1237539154}
   m_Layer: 5
   m_Name: HealthText
-  m_TagString: Untagged
+  m_TagString: HealthText
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
