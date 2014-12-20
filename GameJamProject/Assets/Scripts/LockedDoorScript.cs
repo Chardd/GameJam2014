@@ -6,6 +6,7 @@ public class LockedDoorScript : MonoBehaviour {
 	
 	public Transform camera;
 	public Transform player;
+	public GameObject canvas;
 	GameObject playerObj;
 	public bool win;
 	// Use this for initialization
@@ -36,7 +37,7 @@ public class LockedDoorScript : MonoBehaviour {
 				playerObj.GetComponent<PlayerScript>().started = false;
 				playerObj.GetComponent<PlayerScript>().keyDisplay.enabled = false;
 				playerObj.GetComponent<PlayerScript>().upgradeDisplay.enabled = false;
-				GameObject.FindWithTag ("Canvas").SetActive(false);
+				canvas.SetActive(false);
 				camera.position = new Vector3(58.63f,25.48f,-10.0f);
 				win = true;
 
