@@ -43,45 +43,61 @@ public class EnemyScript : MonoBehaviour {
 				//Animation handling maths
 				float curVert = enemy.position.y;
 				float curHorz = enemy.position.x;
-				//float diffVert = vert - curVert;
-				//float diffHorz = horz - curHorz;
-				//Debug.Log (diffVert);
-				//Debug.Log (diffHorz);
-				if (curVert == vert)
+				float diffVert = Vector3.Distance( new Vector3(0,vert,0), new Vector3 (0,curVert,0));
+				float diffHorz = Vector3.Distance( new Vector3(0,horz,0), new Vector3 (0,curHorz,0));
+				Debug.Log ("Stat");
+				Debug.Log (diffVert);
+				Debug.Log (diffHorz);
+
+				if (diffHorz > diffVert)
 				{
 					anim.SetFloat ("Vertical", 0);
+					if (curHorz < horz)
+					{
+						anim.SetFloat ("Horizontal", -1);
+					}
+					else if (curHorz > horz)
+					{
+						anim.SetFloat ("Horizontal", 1);
+					}
+					else
+					{
+						anim.SetFloat ("Horizontal", 0);
+					}
 				}
-				if (curVert > vert)
-				{
-					anim.SetFloat ("Vertical", 1);
-				}
-				if (curVert < vert)
-				{
-					anim.SetFloat ("Vertical", -1);
-				}
-				if (curHorz == horz)
+				else
 				{
 					anim.SetFloat ("Horizontal", 0);
+					if (curVert < vert)
+					{
+						anim.SetFloat ("Vertical", -1);
+					}
+					else if (curVert > vert)
+					{
+						anim.SetFloat ("Vertical", 1);
+					}
+					else
+					{
+						anim.SetFloat ("Vertical", 0);
+					}
 				}
-				if (curHorz > horz)
-				{
-					anim.SetFloat ("Horizontal", 1);
-				}
-				if (curHorz < horz)
-				{
-					anim.SetFloat ("Horizontal", -1);
-				}
+
 				vert = curVert;
 				horz = curHorz;
 			} else {
 					//Debug.Log("LOITER");
+				anim.SetFloat ("Horizontal", 0);
+				anim.SetFloat ("Vertical", 0);
 			}
 		} 
 		else if (!recovering)
 		{
 			recovering = true;
 			anim.SetBool ("Stunned", true);
+			anim.SetFloat ("Horizontal", 0);
+			anim.SetFloat ("Vertical", 0);
 			StartCoroutine(Recovering ());
+
 		}
 	}
 
