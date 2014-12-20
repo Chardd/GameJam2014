@@ -11,11 +11,10 @@ ExportedObj/
 obj/
 *.svd
 *.userprefs
-*.csproj
+/*.csproj
 *.pidb
 *.suo
-*.sln
-**/*.sln
+/*.sln
 *.user
 *.unityproj
 *.booproj
@@ -30,12 +29,3 @@ obj/
 .Trashes
 ehthumbs.db
 Thumbs.db
-*.sln
-GameJamProject/GameJamProject-csharp.sln
-GameJamProject/GameJamProject.sln
-*.sln
-*.sln
-*.meta
-GameJamProject/GameJamProject-csharp.sln
-*.sln
-*.sln
