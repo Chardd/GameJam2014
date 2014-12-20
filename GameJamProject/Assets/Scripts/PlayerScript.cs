@@ -222,6 +222,9 @@ public class PlayerScript : MonoBehaviour {
                 gameOverText.enabled = true;//enable GameOver text
 				audio.PlayOneShot(deathSound,1f);
 				camera.audio.enabled = false;
+				gameObject.collider2D.enabled = false;
+				gameObject.renderer.enabled = false;
+				StartCoroutine(DeathReload());
                 //Destroy(gameObject);
             }
         } 
@@ -231,6 +234,13 @@ public class PlayerScript : MonoBehaviour {
 		isAttacking = true;
 		yield return new WaitForSeconds(1f);
 		isAttacking = false;
+	}
+	IEnumerator DeathReload()
+	{
+
+		yield return new WaitForSeconds(3f);
+		Application.LoadLevel (0);
+
 	}
 
 }

@@ -51,6 +51,7 @@
      <Compile Include="Assets\Scripts\EnemyScript.cs" />
      <Compile Include="Assets\Scripts\ItemStaff.cs" />
      <Compile Include="Assets\Scripts\LeftDoorScript.cs" />
+     <Compile Include="Assets\Scripts\LockedDoorScript.cs" />
      <Compile Include="Assets\Scripts\LockerScript.cs" />
      <Compile Include="Assets\Scripts\MeleeScript.cs" />
      <Compile Include="Assets\Scripts\PlayerScript.cs" />

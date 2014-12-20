@@ -6,7 +6,7 @@ public class EnemyScript : MonoBehaviour {
 	public Transform target;
 
 	// Change pursuit speed
-	public float speed = .01f;
+	public float speed = .03f;
 	// distance to trigger pursuit
 	public float triggerDistance = 5.0f;
 	// This enemy's position

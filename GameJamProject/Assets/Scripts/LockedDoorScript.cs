@@ -7,11 +7,14 @@ public class LockedDoorScript : MonoBehaviour {
 	public Transform camera;
 	public Transform player;
 	public GameObject canvas;
+	public AudioClip victorySound;
 	GameObject playerObj;
 	public bool win;
+	GameObject cameraObj;
 	// Use this for initialization
 	void Start () {
 		camera = GameObject.FindWithTag("MainCamera").transform;
+		cameraObj = GameObject.FindWithTag("MainCamera");
 		player = GameObject.FindWithTag("Player").transform;
 		playerObj = GameObject.FindWithTag("Player");
 		win = false;
@@ -34,6 +37,8 @@ public class LockedDoorScript : MonoBehaviour {
 		if (collider.gameObject.tag == "Player"){
 			if(playerObj.GetComponent<PlayerScript>().hasKey == true)
 			{
+				cameraObj.audio.enabled = false;
+				audio.PlayOneShot(victorySound,1f);
 				playerObj.GetComponent<PlayerScript>().started = false;
 				playerObj.GetComponent<PlayerScript>().keyDisplay.enabled = false;
 				playerObj.GetComponent<PlayerScript>().upgradeDisplay.enabled = false;
