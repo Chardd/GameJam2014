@@ -10,8 +10,8 @@ PlayerSettings:
   targetGlesGraphics: 1
   targetResolution: 0
   accelerometerFrequency: 60
-  companyName: DefaultCompany
-  productName: GameJamProject
+  companyName: Brohemoths
+  productName: Merlin's Mental Misshap
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   defaultScreenWidth: 1024
@@ -105,9 +105,17 @@ PlayerSettings:
   AndroidSplashScreenScale: 0
   AndroidKeystoreName: 
   AndroidKeyaliasName: 
-  resolutionDialogBanner: {fileID: 0}
-  m_BuildTargetIcons: []
-  m_BuildTargetBatching: []
+  resolutionDialogBanner: {fileID: 2800000, guid: 534083dbf7b5ebc4dbf76c2682f9fce6,
+    type: 3}
+  m_BuildTargetIcons:
+  - m_BuildTarget: 
+    m_Icons:
+    - m_Icon: {fileID: 2800000, guid: cdb13f259b8dcb94ab60b31e9f616585, type: 3}
+      m_Size: 128
+  m_BuildTargetBatching:
+  - m_BuildTarget: Standalone
+    m_StaticBatching: 1
+    m_DynamicBatching: 1
   webPlayerTemplate: APPLICATION:Default
   m_TemplateCustomTags: {}
   locationUsageDescription: 
